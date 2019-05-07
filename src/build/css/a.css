@@ -1,0 +1,7 @@
+body {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  margin: 30px;
+  padding-left: 20px; }
+  body:after {
+    content: 'fwfewfw'; }
