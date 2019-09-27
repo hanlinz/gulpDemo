@@ -4,6 +4,8 @@ const gulpLoadPlugins = require('gulp-load-plugins'),
 	plugins = gulpLoadPlugins();
 const path = require('path')
 const open = require('open')
+const imagemin = require('gulp-imagemin');
+const pngquant = require('imagemin-pngquant');
 
 function resolvePath(str){
 	return path.resolve(__dirname, str)
@@ -53,6 +55,14 @@ gulp.task('auto', function(done){
     gulp.watch(resolvePath('./src/develop/sass/**/*.scss'), ['sass']);
     gulp.watch(resolvePath('./**/*.html'), ['html'])
     // done()
+})
+
+gulp.task('imagemin', function(){
+	return gulp.src(resolvePath('./src/develop/img/**/*.*'))
+	.pipe(imagemin({
+		progressive: true,
+		use: [pngquant()]
+	})).pipe(gulp.dest(resolvePath('./src/build/img')))
 })
 
 gulp.task('default', ['server', 'auto'])
